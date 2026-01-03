@@ -1,16 +1,8 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -25,14 +17,16 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   min-height: 100vh;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  /* text-align: center; */
 }
 
 button {
@@ -45,24 +39,71 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: azure;
+  transition: linear 0.10s;
 }
 button:hover {
-  border-color: #646cff;
+  /* border-color: #e88787; */
+  transform: scale(0.98);
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.container {
+  display: flex;
+  flex-direction: column;
+  /* height: 525px; */
+  width: 350px;
+  justify-content: space-around;
+  padding: 1.5rem;
+  /* border: 1px solid black; */
+  box-shadow: 4px 9px 20px 3px #6dcbdd;;
+  border-radius: 1.5rem;
+}
+
+.container h1 {
+  font-size: 2.5rem;
+  padding-bottom: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  /* background-color: #535bf2; */
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 1.2rem;
+  padding-bottom: 0.5rem;
+}
+
+input {
+  padding: 0.5rem;
+  border: none;
+  border-bottom: 1px solid;
+  margin-bottom: 1rem;
+}
+
+:placeholder-shown {
+  font-style: italic;
+}
+
+input:focus-visible {
+  outline: none;
+  border-bottom: 2px solid #646cff;
+}
+
+form button {
+  margin: 1rem 0 1rem 0;
+}
+
+span {
+  text-align: center;
 }
