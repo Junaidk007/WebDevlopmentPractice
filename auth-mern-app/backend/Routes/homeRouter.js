@@ -6,8 +6,9 @@ router.get('/', userVerification, async (req,res) => {
     const {username, email} = req.user;
 
     res.status(200).json({
-        name : username,
-        email : email
+        email : email,
+        status : 'Student',
+        description : '2nd year BCA student and a web developer.'
     })
 })
 

@@ -5,6 +5,7 @@ import {handleSuccess } from "../util/Utility";
 
 function Home() {
     const [loggedInUser, setLoggedInUser] = useState('');
+    const [data, setData] = useState({})
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,9 +19,30 @@ function Home() {
 
         setTimeout(() => (navigate('/login')), 1000);
     }
+
+    const fetchDetails = async () => {
+        const api = "http://localhost:8080/"
+        const response = await fetch(api, {
+            headers: {'Authorization' : localStorage.getItem('token')}
+        });
+        const result = await response.json();
+        // console.log(result)
+        setData(result)
+    }
+    let {email, status, description} = data;
+
+    useEffect(() => {
+        fetchDetails();
+    }, [])
     return ( 
         <div className="container">
-            <h2>Hello:&nbsp;{loggedInUser}&nbsp;👋👋</h2>
+            <h2>Hello:&nbsp;{loggedInUser}&nbsp;👋👋</h2> 
+            <hr /><br />
+            <div className="box">
+                <p><b>Email:</b> {email}</p>
+                <p><b>Status:</b> {status}</p>
+                <p><b>Description:</b> {description}</p>
+            </div>
             <br />
             <button onClick={handleLogout}>LogOut</button>
             <ToastContainer/>

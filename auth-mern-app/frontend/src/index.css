@@ -107,3 +107,9 @@ form button {
 span {
   text-align: center;
 }
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
