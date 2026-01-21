@@ -4,7 +4,6 @@ const {createSecretToken} = require('../utils/createToken.js');
 
 module.exports.signupController = async (req,res) => {
     try {
-        console.log(req.body);
         const {name, email, password, role} = req.body;
 
         // Check if user already exists
@@ -40,7 +39,6 @@ module.exports.signupController = async (req,res) => {
 
 module.exports.loginController = async (req,res) => {
     try {
-        console.log(req.body);
         const {email, password} = req.body;
         const user = await User.findOne({email});
 
