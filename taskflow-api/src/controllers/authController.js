@@ -1,74 +1,54 @@
 const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
-const {createSecretToken} = require('../utils/createToken.js');
+const { createSecretToken } = require('../utils/createToken.js');
+const ApiError = require('../utils/apiError.js');
 
-module.exports.signupController = async (req,res) => {
-    try {
-        const {name, email, password, role} = req.body;
+module.exports.signupController = async (req, res) => {
+    const { name, email, password, role } = req.body;
 
-        // Check if user already exists
-        const existingUser = await User.findOne({email});
-        if (existingUser) return res.status(409).json({
-            message: "User already exists",
-            success: false
-        })
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
 
-        const hashedPassword = await bcrypt.hash(password, 12);
+    if (existingUser) throw new ApiError('User already exists', 409);
 
-        const newUser = new User({
-            name,
-            email,
-            password: hashedPassword,
-            role
-        });
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 12);
 
-        await newUser.save();
+    const newUser = new User({
+        name,
+        email,
+        password: hashedPassword,
+        role
+    });
 
-        res.status(201).json({
-            message: "User created successfully",
-            success: true
-        })
-    } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            message: "Internal server error",
-            success: false
-        })
+    await newUser.save();
+
+    res.status(201).json({
+        message: "User created successfully",
+        success: true
+    })
+}
+
+module.exports.loginController = async (req, res) => {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+
+    // Check if user exists
+    if (!user) {
+        throw new ApiError('User not found, please signup', 404);
     }
-}        
 
-module.exports.loginController = async (req,res) => {
-    try {
-        const {email, password} = req.body;
-        const user = await User.findOne({email});
+    // password verification 
+    const isVerified = await bcrypt.compare(password, user.password);
 
-        // Check if user exists
-        if (!user) return res.status(404).json({
-            message: 'User not found, please signup',
-            success: false
-        })
+    if (!isVerified) throw new ApiError('Invalid credentials', 401);
 
-        // password verification 
-        const isVerified = await bcrypt.compare(password, user.password);
+    // create token
+    const jwtToken = createSecretToken(user);
 
-        if (!isVerified) return res.status(401).json({
-            message: 'Invalid credentials',
-            success: false
-        });
-
-        // create token
-        const jwtToken = createSecretToken(user);
-
-        res.status(200).json({
-            message: 'Login successful',
-            success: true,
-            token: jwtToken
-        })
-    } catch (e) {
-        console.log(e); 
-        res.status(500).json({
-            message: "Internal server error",
-            success: false
-        })
-    }
+    res.status(200).json({
+        message: 'Login successful',
+        success: true,
+        token: jwtToken
+    })
 }

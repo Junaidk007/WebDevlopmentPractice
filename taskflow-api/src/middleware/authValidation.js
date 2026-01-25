@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const ApiError = require('../utils/apiError.js');
 
 const signupValidation = (req, res, next) => {
     const passwordRegex =
@@ -29,8 +30,7 @@ const signupValidation = (req, res, next) => {
     })
     const { error } = schema.validate(req.body);
     if (error) {
-        return res.status(400)
-            .json({ message: "Bad request", error: error.details[0].message, success: false });
+        throw new ApiError(error.details[0].message, 400);
     }
     next();
 }
@@ -55,8 +55,7 @@ const loginValidation = (req, res, next) => {
     })
     const { error } = schema.validate(req.body);
     if (error) {
-        return res.status(400)
-            .json({ message: "Bad request", error: error.details[0].message, success: false });
+        throw new ApiError(error.details[0].message, 400);
     }
     next();
 }
