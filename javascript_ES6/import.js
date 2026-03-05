@@ -1,4 +1,4 @@
-import {obj} from './export.js';
+import obj2 from './export.js';
 
-console.log(obj.car1);
-console.log(obj.car2);
+console.log(obj2.car1);
+console.log(obj2.car2);
