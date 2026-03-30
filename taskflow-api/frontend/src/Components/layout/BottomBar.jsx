@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useMyContext } from '../../Context/context';
+import ThemeToggle from './ThemeToggle';
 
 function BottomBar() {
     const navigate = useNavigate();
@@ -7,7 +8,7 @@ function BottomBar() {
 
     const handleLogout = () => {
         logout();
-        navigate('/login');
+        navigate('/auth');
     };
 
     return (
@@ -25,9 +26,9 @@ function BottomBar() {
                     <i className="fa-solid fa-circle-plus"></i>
                 </button>
 
-                <button type="button" className="bar-action" aria-label="User profile">
-                    <i className="fa-solid fa-user"></i>
-                </button>
+                <div className="bar-action" style={{ width: 'auto', padding: '0 8px' }}>
+                    <ThemeToggle />
+                </div>
 
                 <button type="button" className="bar-action" aria-label="Logout" onClick={handleLogout}>
                     <i className="fa-solid fa-arrow-right-from-bracket"></i>

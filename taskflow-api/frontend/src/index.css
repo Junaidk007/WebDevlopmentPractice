@@ -1,77 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Gen-Z Palette - Light Mode */
+  --bg-base: #f4f6fa;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f8fafc;
+  
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.15);
+  
+  --accent-primary: #5465ff;
+  --accent-hover: #788bff;
+  --accent-light: #bfd7ff;
+  --accent-faded: #e2fdff;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 10px 24px rgba(15, 23, 42, 0.07);
+  --shadow-glow: 0 0 0 3px rgba(84, 101, 255, 0.2);
+  
+  /* Status Colors */
+  --status-progress-bg: #5465ff;
+  --status-pending-bg: #f59e0b;
+  --status-completed-bg: #16a34a;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --status-progress-text: #ffffff;
+  --status-pending-text: #ffffff;
+  --status-completed-text: #ffffff;
+}
+
+[data-theme="dark"] {
+  /* Gen-Z Palette - Dark Mode */
+  --bg-base: #0f1115;
+  --bg-surface: #181a20;
+  --bg-elevated: #20232a;
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  
+  --accent-primary: #788bff;
+  --accent-hover: #9bb1ff;
+  --accent-light: rgba(120, 139, 255, 0.15);
+  --accent-faded: rgba(120, 139, 255, 0.05);
+
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 14px 28px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 0 3px rgba(120, 139, 255, 0.3);
+
+  /* Status Colors Dark Mode - Vibrant neon */
+  --status-progress-bg: rgba(120, 139, 255, 0.15);
+  --status-pending-bg: rgba(245, 158, 11, 0.15);
+  --status-completed-bg: rgba(22, 163, 74, 0.15);
+
+  --status-progress-text: #9bb1ff;
+  --status-pending-text: #fcd34d;
+  --status-completed-text: #86efac;
 }
 
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
+  /* Smooth transition for theme toggles */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-} */
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  /* min-width: 320px; */
+/* Explicitly target base elements so inherited transitions work perfectly */
+body, html {
+  font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: var(--bg-base);
+  color: var(--text-main);
   min-height: 100dvh;
-}
-/* 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+::-webkit-scrollbar {
+  display: none;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
- ::-webkit-scrollbar {
-    display: none;
-  }

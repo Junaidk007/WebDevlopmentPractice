@@ -1,7 +1,8 @@
 // Central API service used by all frontend pages/components.
 // Keeping API logic here avoids repeating fetch/auth handling everywhere.
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+const DEFAULT_BACKEND_ORIGIN ='http://localhost:8080';
+const API_BASE_URL = import.meta.env.VITE_API_URL || `${DEFAULT_BACKEND_ORIGIN}/api`;
 const TOKEN_STORAGE_KEY = 'taskflow_token';
 
 export const getAuthToken = () => localStorage.getItem(TOKEN_STORAGE_KEY);
@@ -29,11 +30,17 @@ async function apiRequest(path, options = {}) {
     headers.Authorization = authToken;
   }
 
-  const response = await fetch(buildUrl(path), {
-    method,
-    headers,
-    body: body ? JSON.stringify(body) : undefined
-  });
+  let response;
+
+  try {
+    response = await fetch(buildUrl(path), {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined
+    });
+  } catch (error) {
+    throw new Error('Cannot reach backend server. Make sure the API is running on http://localhost:8080.');
+  }
 
   const data = await response.json().catch(() => ({}));
 

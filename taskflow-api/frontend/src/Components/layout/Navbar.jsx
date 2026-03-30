@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useMyContext } from '../../Context/context';
+import ThemeToggle from './ThemeToggle';
 import './navbar.css';
 
 const menuItems = [
@@ -14,7 +15,7 @@ function Navbar() {
 
     const handleLogout = () => {
         logout();
-        navigate('/login');
+        navigate('/auth');
     };
 
     return (
@@ -22,8 +23,8 @@ function Navbar() {
             <div className="nav">
                 {/* Brand area */}
                 <div className="navbar-brand pt-4 ps-3">
-                    <h4 className="fs-3 m-0">TaskFlow</h4>
-                    <p className="brand-caption">Plan smart. Ship on time.</p>
+                    <h4 className="fs-3 m-0" style={{ color: 'var(--text-main)' }}>TaskFlow</h4>
+                    <p className="brand-caption" style={{ color: 'var(--text-muted)' }}>Plan smart. Ship on time.</p>
                 </div>
 
                 {/* Main navigation links */}
@@ -47,9 +48,11 @@ function Navbar() {
                         ))}
                     </div>
                 </div>
-
-                {/* Logout action clears token then redirects */}
+                
                 <div className="logout">
+                    <div style={{ padding: '0 0.75rem 1rem' }}>
+                        <ThemeToggle />
+                    </div>
                     <button type="button" className="nav-link menu-item logout-link nav-btn" onClick={handleLogout}>
                         <i className="fa-solid fa-arrow-right-from-bracket"></i>Logout
                     </button>

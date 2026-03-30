@@ -2,8 +2,7 @@ import './App.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { MyContextProvider } from './Context/MyContext';
 import { useMyContext } from './Context/context';
-import Register from './Pages/Auth/Register';
-import Login from './Pages/Auth/Login';
+import Auth from './Pages/Auth/Auth';
 import Dashboard from './Pages/Dashboard/Dashboard';
 
 // Protects private pages (dashboard/tasks).
@@ -32,18 +31,10 @@ function AppRoutes() {
   return (
     <Routes>
       <Route
-        path='/register'
+        path='/auth'
         element={
           <PublicAuthRoute>
-            <Register />
-          </PublicAuthRoute>
-        }
-      />
-      <Route
-        path='/login'
-        element={
-          <PublicAuthRoute>
-            <Login />
+            <Auth />
           </PublicAuthRoute>
         }
       />
