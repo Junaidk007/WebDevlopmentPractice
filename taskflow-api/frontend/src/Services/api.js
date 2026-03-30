@@ -1,7 +1,7 @@
 // Central API service used by all frontend pages/components.
 // Keeping API logic here avoids repeating fetch/auth handling everywhere.
 
-const DEFAULT_BACKEND_ORIGIN ='http://localhost:8080';
+const DEFAULT_BACKEND_ORIGIN ='https://webdevlopmentpractice.onrender.com';
 const API_BASE_URL = import.meta.env.VITE_API_URL || `${DEFAULT_BACKEND_ORIGIN}/api`;
 const TOKEN_STORAGE_KEY = 'taskflow_token';
 
