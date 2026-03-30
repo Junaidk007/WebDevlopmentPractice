@@ -10,7 +10,7 @@ function ProtectedRoute({ children }) {
   const { isAuthenticated } = useMyContext();
 
   if (!isAuthenticated) {
-    return <Navigate to='/login' replace />;
+    return <Navigate to='/auth' replace />;
   }
 
   return children;
